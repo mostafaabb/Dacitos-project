@@ -6,12 +6,24 @@ export function useParallax(speed: number = 0.2) {
   const [offsetY, setOffsetY] = useState(0);
 
   useEffect(() => {
+    let frameId = 0;
+
     const handleScroll = () => {
-      setOffsetY(window.scrollY * speed);
+      if (frameId) return;
+
+      frameId = window.requestAnimationFrame(() => {
+        frameId = 0;
+        setOffsetY(window.scrollY * speed);
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
   }, [speed]);
 
   return offsetY;

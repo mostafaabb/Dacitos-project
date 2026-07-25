@@ -24,7 +24,7 @@ export function ParticleBackground() {
     window.addEventListener('resize', handleResize);
 
     const particles: Particle[] = [];
-    const particleCount = Math.min(Math.floor(width / 18), 80);
+    const particleCount = Math.min(Math.floor(width / 36), 40);
 
     let mouse = { x: width / 2, y: height / 2, radius: 140 };
 
@@ -95,7 +95,7 @@ export function ParticleBackground() {
 
     const connectParticles = () => {
       for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
+        for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
           const dy = particles[a].y - particles[b].y;
           const dist = Math.sqrt(dx * dx + dy * dy);

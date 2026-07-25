@@ -45,7 +45,7 @@ export function Cursor() {
       window.removeEventListener('mouseover', handleMouseOver);
       document.body.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [isVisible]);
+  }, []);
 
   if (!isVisible) return null;
 
